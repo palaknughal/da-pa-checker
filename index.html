@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free DA PA Checker</title>
+  <meta name="description" content="Check website Domain Authority and Page Authority with our SEO checker.">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #172033;
+    }
+    header {
+      background: #172554;
+      color: white;
+      padding: 22px;
+      text-align: center;
+    }
+    main {
+      max-width: 700px;
+      margin: 55px auto;
+      padding: 28px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px #17255412;
+    }
+    h2 { text-align: center; }
+    p { color: #64748b; text-align: center; line-height: 1.6; }
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 16px 0 12px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background: #2563eb;
+      border: 0;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #eff6ff;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+    footer { text-align: center; padding: 20px; color: #64748b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DA PA Checker</h1>
+    <div>Simple SEO Authority Checker</div>
+  </header>
+
+  <main>
+    <h2>Check Website Authority</h2>
+    <p>Enter a website URL to get started.</p>
+
+    <form id="checker">
+      <input id="website" type="text"
+        placeholder="https://example.com"
+        aria-label="Website URL" required>
+      <button type="submit">Check DA PA</button>
+    </form>
+
+    <div id="result" hidden aria-live="polite"></div>
+    <p>Real DA and PA scores will appear after an SEO data API is connected.</p>
+  </main>
+
+  <footer>DA PA Checker · SEO Tools</footer>
+
+  <script>
+    document.getElementById("checker").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const field = document.getElementById("website");
+      const result = document.getElementById("result");
+      let url;
+
+      try {
+        url = new URL(
+          /^https?:\/\//i.test(field.value.trim())
+            ? field.value.trim()
+            : "https://" + field.value.trim()
+        );
+        if (!["http:", "https:"].includes(url.protocol)) throw new Error();
+      } catch {
+        result.hidden = false;
+        result.textContent = "Please enter a valid website URL.";
+        return;
+      }
+
+      result.hidden = false;
+      result.textContent =
+        "Website: " + url.hostname +
+        ". Your checker design is working! Real DA and PA scores are not connected yet.";
+    });
+  </script>
+</body>
+</html>
